@@ -19,16 +19,15 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.algaworks.brewer.controller.CervejasController;
 
 @Configuration
-@ComponentScan(basePackageClasses = CervejasController.class)
+@ComponentScan(basePackageClasses = { CervejasController.class })
 @EnableWebMvc
-public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware{
-	
+public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+
 	private ApplicationContext applicationContext;
-	
+
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
-		
 	}
 
 	@Bean
@@ -38,7 +37,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		resolver.setCharacterEncoding("UTF-8");
 		return resolver;
 	}
-	
+
 	@Bean
 	public TemplateEngine templateEngine() {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
@@ -46,13 +45,14 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		engine.setTemplateResolver(templateResolver());
 		return engine;
 	}
-	
+
 	private ITemplateResolver templateResolver() {
 		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
 		resolver.setApplicationContext(applicationContext);
 		resolver.setPrefix("classpath:/templates/");
-		resolver.setSuffix(".html");		
+		resolver.setSuffix(".html");
 		resolver.setTemplateMode(TemplateMode.HTML);
 		return resolver;
 	}
+
 }
