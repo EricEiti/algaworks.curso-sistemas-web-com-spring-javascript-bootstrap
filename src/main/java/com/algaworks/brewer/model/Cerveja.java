@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class Cerveja {
 
-	@NotBlank
+	@NotBlank(message = ">>>> tem erro sim!")
 	private String sku;
 	
 	private String nome;
